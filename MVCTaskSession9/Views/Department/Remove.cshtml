@@ -1,0 +1,25 @@
+﻿@model Department
+@{
+    ViewData["Title"] = "Remove";
+}
+
+<br id="Remove"/>
+
+<h1>Remove</h1>
+
+<hr />
+
+<div class="col-sm-5" style="display:block; margin-top:5px; margi">
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">@Model.Name</h5>
+			<p class="card-text">Manager Name: @Model.ManagerName</p>
+
+
+		</div>
+	</div>
+</div>
+
+<p class="text-danger">Are You Sure You Want to Remove This instructor !!</p>
+<a href="/Department/Delete/@Model.Id/#Remove" class="btn btn-primary" style="width:10%">Yes</a>
+<a href="/Department/Index/#Departments" class="btn btn-primary" style="width:10%">No</a>

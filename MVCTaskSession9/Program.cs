@@ -1,32 +1,50 @@
-namespace MVCTaskSession9
+using Microsoft.EntityFrameworkCore;
+using MVC_Task2.Models;
+using MVCTaskSession6.Repos.IRepositories;
+using MVCTaskSession6.Repos.Repositories;
+
+namespace MVCTaskSession6
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+			// Add services to the container.
+			builder.Services.AddControllersWithViews();
 
-            var app = builder.Build();
+			builder.Services.AddDbContext<WebAppContext>(optionsBuilder =>
+			{
+				optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("con"));
+			});
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-            app.UseStaticFiles();
+			builder.Services.AddScoped<IGenericRepository<CourseResult>, CourseResultRepository>();
+			builder.Services.AddScoped<IGenericRepository<Instructor>, InstructorRepository>();
+			builder.Services.AddScoped<IGenericRepository<Course>, CourseRepository>();
+			builder.Services.AddScoped<IGenericRepository<Department>, DepartmentRepository>();
+			builder.Services.AddScoped<IGenericRepository<Trainee>, TraineeRepository>();
 
-            app.UseRouting();
 
-            app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+			var app = builder.Build();
 
-            app.Run();
-        }
-    }
+			// Configure the HTTP request pipeline.
+			if (!app.Environment.IsDevelopment())
+			{
+				app.UseExceptionHandler("/Home/Error");
+			}
+			app.UseStaticFiles();
+
+			app.UseRouting();
+
+			app.UseAuthorization();
+
+			app.MapControllerRoute(
+				name: "default",
+				pattern: "{controller=Home}/{action=Index}/{id?}");
+
+			app.Run();
+		}
+	}
 }

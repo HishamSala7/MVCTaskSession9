@@ -1,0 +1,58 @@
+﻿@model Instructor
+@{
+    ViewData["Title"] = "Remove";
+}
+
+<br id="Remove"/>
+
+<h1>Remove</h1>
+
+<hr />
+
+<div>
+	<div class="card-header">
+		<b>Instructor Info..</b>
+	</div>
+	<div class="card-body">
+		<h4 class="card-title">@Model.Name</h4>
+
+		<h6>----------------------</h6>
+
+		<div style="float:right; margin-right:300px;">
+			<img src="/Images/@Model.ImagePath" height="200px" width="200px" />
+		</div>
+
+		<p class="card-text">
+			<b>ID:</b> @Model.Id
+		</p>
+
+
+		<p class="card-text">
+			<b>Salary:</b> @Model.Salary
+		</p>
+
+		<p class="card-text">
+			<b>Address:</b> @Model.Address
+		</p>
+
+		<p class="card-text">
+			<b>Department:</b> @Model.Department.Name
+		</p>
+
+		<p class="card-text">
+			<b>Course:</b> @Model.Course.Name
+		</p>
+
+		<br />
+
+	</div>
+
+</div>
+
+<p class="text-danger">Are You Sure You Want to Remove This instructor !!</p>
+<a href="/Instructor/Delete/@Model.Id/#Remove" class="btn btn-primary" style="width:10%">Yes</a>
+<a href="/Instructor/Index/#Instructors" class="btn btn-primary" style="width:10%">No</a>
+
+
+
+
